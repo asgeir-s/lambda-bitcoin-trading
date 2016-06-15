@@ -83,19 +83,4 @@ public class WilliamR {
         return 9;
     }
 
-        /*
-        if (retCode == RetCode.Success) {
-            if (macdSignal[macdSignal.length - 1] > 1) {
-                return 1;
-            } else if (macdSignal[macdSignal.length - 1] < -1) {
-                return -1;
-            } else if (macdSignal[macdSignal.length - 1] < 1 && macdSignal[macdSignal.length - 1] > -1) {
-                return 0;
-            }
-
-        } else {
-            System.out.println("Error");
-            return 9;
-        }
-        */
 }
