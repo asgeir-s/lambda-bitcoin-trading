@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Roc {
 
-    // Rocky
+    // Rocky // 7200
     final static String apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdHJlYW1JZCI6IjYxNmZkZTQ4LTk3NjYtNDNlMi04MDlmLTNlMDRjM2Q4MGU4YSIsImFwaUtleUlkIjoiYjhiN2I0MWMtMDUyMy00OTAzLWEyNDgtOGMyMWNkMGI3YjkyIiwidXNlcklkIjoiYXV0aDB8NTc1MDUzMTU0ZTVhMTg5NzcwMmE4MDhiIiwiaWF0IjoxNDY2MDA1MDQ4LCJhdWQiOiI3Vk5TMlRjMklpUUIyUHZqVUJjYjU3NDRxSDllWTdpQiIsImlzcyI6InRyYWRlcnNiaXQuY29tIiwic3ViIjoiYXV0aDB8NTc1MDUzMTU0ZTVhMTg5NzcwMmE4MDhiIn0.Wbtkg6gc8BBjEmjIFRUeeeipDCZt71ni83jtQT6Muhs";
     final static String streamId = "616fde48-9766-43e2-809f-3e04c3d80e8a";
 
@@ -30,7 +30,7 @@ public class Roc {
         //List<Tick> ticks = Sns2Tick.sns2Ticks(event);
 
         Connection database = Database.getConnection();
-        List<Tick> ticks = Database.getTicks(database, 21600, 30);
+        List<Tick> ticks = Database.getTicks(database, 7200, 30);
 
         TradesBitTrade status = TradersBit.getStatus(apiKey, streamId);
 

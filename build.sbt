@@ -32,8 +32,8 @@ enablePlugins(AwsLambdaPlugin)
 lambdaHandlers := Seq(
   "ts-macd-1" -> "systems.Macd1::handler",
   "ts-aroon-1" -> "systems.Aroon::handler",
-  "ts-williamr-1" -> "systems.WilliamR::handler"
-
+  "ts-williamr-1" -> "systems.WilliamR::handler",
+  "ts-roc-1" -> "systems.Roc::handler"
 )
 
 s3Bucket := Some("ts-lambdas")
