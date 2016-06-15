@@ -33,14 +33,14 @@ public class Database {
     }
 
 
-    public static List<Tick> getTicks(Connection c, int lastNum) {
+    public static List<Tick> getTicks(Connection c, int interval, int lastNum) {
         List<Tick> ticks = new ArrayList<Tick>();
 
         // get history fram database
         Statement stmt = null;
         try {
             stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM bitfinex_tick_1800;");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM bitfinex_tick_" + interval + ";");
             while (rs.next()) {
                 Tick tick = new Tick();
                 tick.setId(rs.getInt("id"));

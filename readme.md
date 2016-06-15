@@ -1,0 +1,2 @@
+        sbt createLambda
+        sbt updateLambda

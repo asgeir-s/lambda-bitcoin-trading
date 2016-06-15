@@ -30,14 +30,11 @@ retrieveManaged := true
 enablePlugins(AwsLambdaPlugin)
 
 lambdaHandlers := Seq(
-  "macd" -> "systems.Macd1::handler"
-)
+  "ts-macd-1" -> "systems.Macd1::handler",
+  "ts-aroon-1" -> "systems.Aroon::handler",
+  "ts-williamr-1" -> "systems.WilliamR::handler"
 
-// or, instead of the above, for just one function/handler
-//
-// lambdaName := Some("function1")
-//
-// handlerName := Some("com.gilt.example.Lambda::handleRequest1")
+)
 
 s3Bucket := Some("ts-lambdas")
 
