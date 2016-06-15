@@ -15,15 +15,15 @@ import java.util.List;
 
 public class Roc {
 
-    // Rocky // 7200
+    // Rocky // Good at 7200
     final static String apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdHJlYW1JZCI6IjYxNmZkZTQ4LTk3NjYtNDNlMi04MDlmLTNlMDRjM2Q4MGU4YSIsImFwaUtleUlkIjoiYjhiN2I0MWMtMDUyMy00OTAzLWEyNDgtOGMyMWNkMGI3YjkyIiwidXNlcklkIjoiYXV0aDB8NTc1MDUzMTU0ZTVhMTg5NzcwMmE4MDhiIiwiaWF0IjoxNDY2MDA1MDQ4LCJhdWQiOiI3Vk5TMlRjMklpUUIyUHZqVUJjYjU3NDRxSDllWTdpQiIsImlzcyI6InRyYWRlcnNiaXQuY29tIiwic3ViIjoiYXV0aDB8NTc1MDUzMTU0ZTVhMTg5NzcwMmE4MDhiIn0.Wbtkg6gc8BBjEmjIFRUeeeipDCZt71ni83jtQT6Muhs";
     final static String streamId = "616fde48-9766-43e2-809f-3e04c3d80e8a";
 
-    final static double thresholdLong = 0;
-    final static double thresholdShort = 0;
+    final static double thresholdLong = 3;
+    final static double thresholdShort = -3;
     final static double thresholdCloseLong = 0;
     final static double thresholdCloseShort = 0;
-    final static int periods = 10;
+    final static int periods = 11;
 
 
     public String handler(SNSEvent event, Context context) {

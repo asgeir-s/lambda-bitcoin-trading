@@ -15,6 +15,7 @@ import java.util.List;
 
 public class WilliamR {
 
+    // good  at 21600
     //Takazi
     final static String apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdHJlYW1JZCI6ImI1YjQ0OGRmLWFmYWItNGNlNC1hNjk5LTEzMDY0YmM1YmIzMSIsImFwaUtleUlkIjoiYzg0ZGZiNTQtYzhkMi00OGNiLWI1Y2MtZGFhNmE4MTg4ZTg3IiwidXNlcklkIjoiYXV0aDB8NTc1MDUzMTU0ZTVhMTg5NzcwMmE4MDhiIiwiaWF0IjoxNDY2MDAzMTUxLCJhdWQiOiI3Vk5TMlRjMklpUUIyUHZqVUJjYjU3NDRxSDllWTdpQiIsImlzcyI6InRyYWRlcnNiaXQuY29tIiwic3ViIjoiYXV0aDB8NTc1MDUzMTU0ZTVhMTg5NzcwMmE4MDhiIn0.XUd8IbFN1LmPZIWlL2QoaSAdzp-3xjXp1xgND2KaJ0I";
     final static String streamId = "b5b448df-afab-4ce4-a699-13064bc5bb31";
@@ -30,7 +31,7 @@ public class WilliamR {
         //List<Tick> ticks = Sns2Tick.sns2Ticks(event);
 
         Connection database = Database.getConnection();
-        List<Tick> ticks = Database.getTicks(database, 7200, 30);
+        List<Tick> ticks = Database.getTicks(database, 21600, 30);
 
         TradesBitTrade status = TradersBit.getStatus(apiKey, streamId);
 

@@ -28,7 +28,7 @@ public class BackTester {
         double money = 1000;
 
         for (int i = 40; i <= ticks.size()-1; i++) {
-            int result = WilliamR.compute(position, ticks.subList(0, i));
+            int result = Aroon.compute(position, ticks.subList(0, i));
 
             if (result >= -1 && result <= 1 && position != result) {
                 if (position == 0) {

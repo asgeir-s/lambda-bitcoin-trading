@@ -6,24 +6,29 @@ import com.tictactec.ta.lib.Core;
 import com.tictactec.ta.lib.MInteger;
 import com.tictactec.ta.lib.RetCode;
 import util.Database;
-import util.model.Tick;
 import util.TradersBit;
+import util.model.Tick;
+import util.model.TradesBitTrade;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
 public class Macd1 {
-    //Star
-    final static String apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdHJlYW1JZCI6ImVlMWNjMTRiLTNhZDYtNDg2OC05MjllLTYzNjVkMTcxN2U5YSIsImFwaUtleUlkIjoiMzdiZWQxNDktMDY5ZS00YWMyLTlhMjMtZmM2NDBmOTdhMjMyIiwidXNlcklkIjoiYXV0aDB8NTZiNzY1ZjBlYzljZjgyNDNjODFkYTM2IiwiaWF0IjoxNDY1OTczMTY1LCJhdWQiOiI3Vk5TMlRjMklpUUIyUHZqVUJjYjU3NDRxSDllWTdpQiIsImlzcyI6InRyYWRlcnNiaXQuY29tIiwic3ViIjoiYXV0aDB8NTZiNzY1ZjBlYzljZjgyNDNjODFkYTM2In0.UK9YGepSwOL0-ZcmynYsYvx8fq0hnA-vNh4rtZ1TZXg";
-    final static String streamId = "ee1cc14b-3ad6-4868-929e-6365d1717e9a";
+    // good 3600
+    //The BitBear
+    final static String apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdHJlYW1JZCI6Ijg4YmMzNTBmLTU3YjctNDM0YS1iMWM1LTNiNDY3OTNiN2VjMiIsImFwaUtleUlkIjoiZWY2MmViNzctODgxMy00NDdkLTg5OWUtYmRhYTVjZTJlODNkIiwidXNlcklkIjoiYXV0aDB8NTZiNzY1ZjBlYzljZjgyNDNjODFkYTM2IiwiaWF0IjoxNDY2MDI5NTUyLCJhdWQiOiI3Vk5TMlRjMklpUUIyUHZqVUJjYjU3NDRxSDllWTdpQiIsImlzcyI6InRyYWRlcnNiaXQuY29tIiwic3ViIjoiYXV0aDB8NTZiNzY1ZjBlYzljZjgyNDNjODFkYTM2In0.onCaWwRFjIpDANxoz_ZBZyeYbISaRgIctHIgDrq6bRE";
+    final static String streamId = "88bc350f-57b7-434a-b1c5-3b46793b7ec2";
 
     public String handler(SNSEvent event, Context context) {
         //List<Tick> ticks = Sns2Tick.sns2Ticks(event);
         Connection database = Database.getConnection();
-        List<Tick> ticks = Database.getTicks(database, 1800, 30);
+        List<Tick> ticks = Database.getTicks(database, 3600, 30);
 
-        TradersBit.postSignal(apiKey, streamId, Macd1.compute(9, ticks));
+        TradesBitTrade status = TradersBit.getStatus(apiKey, streamId);
+
+
+        TradersBit.postSignal(apiKey, streamId, Macd1.compute(status.getSignal(), ticks));
 
         try {
             database.close();
@@ -54,22 +59,24 @@ public class Macd1 {
         double[] macdHist = new double[ticks.size()];
 
         Core c = new Core();
-        RetCode retCode = c.macd(0, closePrice.length - 1, closePrice, 26, 6, 9, begin, length, macd, macdSignal, macdHist);
+        RetCode retCode = c.macd(0, closePrice.length - 1, closePrice, 8, 30, 9, begin, length, macd, macdSignal, macdHist);
 
-      //    for (int i = 0; i < length.value; i++) {
-      //        System.out.println(begin.value+i + ": time: " + ticks.get(begin.value+i).getTickEndTime() + ", macd: " + macd[i] + ", signal: " + macdSignal[i] + " at price " + closePrice[begin.value+i]);
-      //    }
+        //    for (int i = 0; i < length.value; i++) {
+        //        System.out.println(begin.value+i + ": time: " + ticks.get(begin.value+i).getTickEndTime() + ", macd: " + macd[i] + ", signal: " + macdSignal[i] + " at price " + closePrice[begin.value+i]);
+        //    }
 
-        double lastMacd = macd[length.value-1];
+        double lastMacd = macdSignal[length.value - 1];
         //System.out.println("lastMacd: " + lastMacd);
 
 
         if (retCode == RetCode.Success) {
-            if (lastMacd > 1) {
-                return 1;
-            } else if (lastMacd < -1) {
+            if (lastMacd > 1.9) {
                 return -1;
-            } else if (lastMacd < 1 && lastMacd > -1) {
+            } else if (lastMacd < -1.9) {
+                return 1;
+            } else if (status == 1 && lastMacd < 20) {
+                return 0;
+            } else if (status == -1 && lastMacd > 20) {
                 return 0;
             }
 

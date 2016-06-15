@@ -15,15 +15,16 @@ import java.util.List;
 
 public class Aroon {
 
+    // super good 7200
     // JUMO
     final static String apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdHJlYW1JZCI6ImI5MmU5MzEzLTNiMTgtNDIzYi05OGVmLTQ4ZDQxZDdmOWMyOCIsImFwaUtleUlkIjoiYjBlOTNiYzctNDhhZi00ZDdjLWJmOTAtM2EyMWQzYWM1NWM3IiwidXNlcklkIjoiYXV0aDB8NTc1MDUzMTU0ZTVhMTg5NzcwMmE4MDhiIiwiaWF0IjoxNDY2MDAzMDMwLCJhdWQiOiI3Vk5TMlRjMklpUUIyUHZqVUJjYjU3NDRxSDllWTdpQiIsImlzcyI6InRyYWRlcnNiaXQuY29tIiwic3ViIjoiYXV0aDB8NTc1MDUzMTU0ZTVhMTg5NzcwMmE4MDhiIn0.kFm7TxbvGFflo3CtcrYBuL2IWlgabx1y56FBrY-O03s";
     final static String streamId = "b92e9313-3b18-423b-98ef-48d41d7f9c28";
 
-    final static double thresholdLong = 25;
-    final static double thresholdShort = -25;
+    final static double thresholdLong = 10;
+    final static double thresholdShort = -10;
     final static double thresholdCloseLong = 0;
     final static double thresholdCloseShort = 0;
-    final static int periods = 11;
+    final static int periods = 10;
 
 
     public String handler(SNSEvent event, Context context) {
@@ -62,7 +63,6 @@ public class Aroon {
         Core c = new Core();
         RetCode retCode = c.aroonOsc(0, ticks.size() - 1, highPrice, lowPrice, periods, begin, length, aroonOsc);
 
-
     //    for (int i = 0; i < length.value; i++) {
     //        System.out.println(begin.value + i + ": time: " + ticks.get(begin.value + i).getTickEndTime() + ", aroonOsc: " + aroonOsc[i] + " at price " + closePrice[begin.value + i]);
     //    }
@@ -71,14 +71,14 @@ public class Aroon {
             double lastAroonOsc = aroonOsc[length.value - 1];
             //System.out.println("lastAroonOsc: " + lastAroonOsc);
 
-            if (lastAroonOsc > thresholdLong) {
+            if (lastAroonOsc < thresholdLong) {
                 return 1;
-            } else if (lastAroonOsc < thresholdShort) {
+            } else if (lastAroonOsc > thresholdShort) {
                 return -1;
             } else if (!(status == 0)) {
-                if ((lastAroonOsc < thresholdCloseLong) && status == 1) {
+                if ((lastAroonOsc > thresholdCloseLong) && status == 1) {
                     return 0;
-                } else if ((lastAroonOsc > thresholdCloseShort) && status == -1) {
+                } else if ((lastAroonOsc < thresholdCloseShort) && status == -1) {
                     return 0;
                 }
             }
