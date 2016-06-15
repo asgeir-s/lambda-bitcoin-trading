@@ -38,7 +38,7 @@ public class TradersBit {
 
             int res = connection.getResponseCode();
 
-            System.out.println(res);
+            //System.out.println(res);
 
             //Get Response
             InputStream is = connection.getInputStream();
@@ -86,7 +86,7 @@ public class TradersBit {
 
             int res = connection.getResponseCode();
 
-            System.out.println(res);
+            //System.out.println(res);
 
             //Get Response
             InputStream is = connection.getInputStream();

@@ -23,7 +23,7 @@ public class Macd1 {
     public String handler(SNSEvent event, Context context) {
         //List<Tick> ticks = Sns2Tick.sns2Ticks(event);
         Connection database = Database.getConnection();
-        List<Tick> ticks = Database.getTicks(database, 3600, 30);
+        List<Tick> ticks = Database.getTicks(database, 3600, 40);
 
         TradesBitTrade status = TradersBit.getStatus(apiKey, streamId);
 
