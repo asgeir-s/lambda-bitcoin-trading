@@ -23,7 +23,7 @@ public class Macd1 {
         Connection database = Database.getConnection();
         List<Tick> ticks = Database.getTicks(database, 1800, 30);
 
-        TradersBit.postSignal(apiKey, streamId, Macd1.compute(ticks));
+        TradersBit.postSignal(apiKey, streamId, Macd1.compute(9, ticks));
 
         try {
             database.close();
@@ -35,9 +35,9 @@ public class Macd1 {
     }
 
 
-    private static int compute(List<Tick> ticks) {
+    public static int compute(int status, List<Tick> ticks) {
 
-        System.out.println("number of ticks: " + ticks.size());
+        //System.out.println("number of ticks: " + ticks.size());
 
         double[] closePrice = new double[ticks.size()];
 
@@ -56,12 +56,12 @@ public class Macd1 {
         Core c = new Core();
         RetCode retCode = c.macd(0, closePrice.length - 1, closePrice, 26, 6, 9, begin, length, macd, macdSignal, macdHist);
 
-          for (int i = 0; i < length.value; i++) {
-              System.out.println(begin.value+i + ": time: " + ticks.get(begin.value+i).getTickEndTime() + ", macd: " + macd[i] + ", signal: " + macdSignal[i] + " at price " + closePrice[begin.value+i]);
-          }
+      //    for (int i = 0; i < length.value; i++) {
+      //        System.out.println(begin.value+i + ": time: " + ticks.get(begin.value+i).getTickEndTime() + ", macd: " + macd[i] + ", signal: " + macdSignal[i] + " at price " + closePrice[begin.value+i]);
+      //    }
 
         double lastMacd = macd[length.value-1];
-        System.out.println("lastMacd: " + lastMacd);
+        //System.out.println("lastMacd: " + lastMacd);
 
 
         if (retCode == RetCode.Success) {

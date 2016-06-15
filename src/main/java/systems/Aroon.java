@@ -34,14 +34,14 @@ public class Aroon {
 
         TradesBitTrade status = TradersBit.getStatus(apiKey, streamId);
 
-        TradersBit.postSignal(apiKey, streamId, compute(status, ticks));
+        TradersBit.postSignal(apiKey, streamId, compute(status.getSignal(), ticks));
         return "ok";
     }
 
 
-    private static int compute(TradesBitTrade status, List<Tick> ticks) {
+    public static int compute(int status, List<Tick> ticks) {
 
-        System.out.println("number of ticks: " + ticks.size());
+        //System.out.println("number of ticks: " + ticks.size());
 
         double[] highPrice = new double[ticks.size()];
         double[] lowPrice = new double[ticks.size()];
@@ -69,16 +69,16 @@ public class Aroon {
 
         if (retCode == RetCode.Success) {
             double lastAroonOsc = aroonOsc[length.value - 1];
-            System.out.println("lastAroonOsc: " + lastAroonOsc);
+            //System.out.println("lastAroonOsc: " + lastAroonOsc);
 
             if (lastAroonOsc > thresholdLong) {
                 return 1;
             } else if (lastAroonOsc < thresholdShort) {
                 return -1;
-            } else if (!(status.getSignal() == 0)) {
-                if ((lastAroonOsc < thresholdCloseLong) && status.getSignal() == 1) {
+            } else if (!(status == 0)) {
+                if ((lastAroonOsc < thresholdCloseLong) && status == 1) {
                     return 0;
-                } else if ((lastAroonOsc > thresholdCloseShort) && status.getSignal() == -1) {
+                } else if ((lastAroonOsc > thresholdCloseShort) && status == -1) {
                     return 0;
                 }
             }

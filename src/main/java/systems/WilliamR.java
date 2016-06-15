@@ -34,14 +34,14 @@ public class WilliamR {
 
         TradesBitTrade status = TradersBit.getStatus(apiKey, streamId);
 
-        TradersBit.postSignal(apiKey, streamId, compute(status, ticks));
+        TradersBit.postSignal(apiKey, streamId, compute(status.getSignal(), ticks));
         return "ok";
     }
 
 
-    private static int compute(TradesBitTrade status, List<Tick> ticks) {
+    public static int compute(int status, List<Tick> ticks) {
 
-        System.out.println("number of ticks: " + ticks.size());
+     //   System.out.println("number of ticks: " + ticks.size());
 
         double[] highPrice = new double[ticks.size()];
         double[] lowPrice = new double[ticks.size()];
@@ -67,16 +67,16 @@ public class WilliamR {
      //   }
 
         double lastWill = out[length.value-1];
-        System.out.println("lastWill: " + lastWill);
+     //   System.out.println("lastWill: " + lastWill);
 
         if (lastWill < thresholdLong) {
             return 1;
         } else if (lastWill > thresholdShort) {
             return -1;
-        } else if (!(status.getSignal() == 0)) {
-            if ((lastWill > thresholdCloseLong) && status.getSignal() == 1) {
+        } else if (!(status == 0)) {
+            if ((lastWill > thresholdCloseLong) && status == 1) {
                 return 0;
-            } else if ((lastWill < thresholdCloseShort) && status.getSignal() == -1) {
+            } else if ((lastWill < thresholdCloseShort) && status == -1) {
                 return 0;
             }
         }

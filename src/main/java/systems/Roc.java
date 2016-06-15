@@ -34,14 +34,14 @@ public class Roc {
 
         TradesBitTrade status = TradersBit.getStatus(apiKey, streamId);
 
-        TradersBit.postSignal(apiKey, streamId, compute(status, ticks));
+        TradersBit.postSignal(apiKey, streamId, compute(status.getSignal(), ticks));
         return "ok";
     }
 
 
-    private static int compute(TradesBitTrade status, List<Tick> ticks) {
+    public static int compute(int status, List<Tick> ticks) {
 
-        System.out.println("number of ticks: " + ticks.size());
+      //  System.out.println("number of ticks: " + ticks.size());
 
         double[] highPrice = new double[ticks.size()];
         double[] lowPrice = new double[ticks.size()];
@@ -62,22 +62,22 @@ public class Roc {
         Core c = new Core();
         RetCode retCode = c.roc(0, ticks.size()-1, closePrice, periods, begin, length, roc);
 
-        for (int i = 0; i < length.value; i++) {
-            System.out.println(begin.value + i + ": time: " + ticks.get(begin.value + i).getTickEndTime() + ", aroonOsc: " + roc[i] + " at price " + closePrice[begin.value + i]);
-        }
+       // for (int i = 0; i < length.value; i++) {
+       //     System.out.println(begin.value + i + ": time: " + ticks.get(begin.value + i).getTickEndTime() + ", aroonOsc: " + roc[i] + " at price " + closePrice[begin.value + i]);
+       // }
 
         if (retCode == RetCode.Success) {
             double lastRoc = roc[length.value - 1];
-            System.out.println("lastRoc: " + lastRoc);
+            //System.out.println("lastRoc: " + lastRoc);
 
             if (lastRoc < thresholdLong) {
                 return 1;
             } else if (lastRoc > thresholdShort) {
                 return -1;
-            } else if (!(status.getSignal() == 0)) {
-                if ((lastRoc > thresholdCloseLong) && status.getSignal() == 1) {
+            } else if (!(status == 0)) {
+                if ((lastRoc > thresholdCloseLong) && status == 1) {
                     return 0;
-                } else if ((lastRoc < thresholdCloseShort) && status.getSignal() == -1) {
+                } else if ((lastRoc < thresholdCloseShort) && status == -1) {
                     return 0;
                 }
             }
