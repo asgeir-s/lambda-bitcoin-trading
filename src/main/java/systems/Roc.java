@@ -35,6 +35,8 @@ public class Roc {
         TradesBitTrade status = TradersBit.getStatus(apiKey, streamId);
 
         TradersBit.postSignal(apiKey, streamId, compute(status.getSignal(), ticks));
+
+        System.out.println("last tick time: " + ticks.get(ticks.size()-1).getTickEndTime());
         return "ok";
     }
 

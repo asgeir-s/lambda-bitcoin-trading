@@ -36,6 +36,7 @@ public class Macd1 {
             e.printStackTrace();
         }
 
+        System.out.println("last tick time: " + ticks.get(ticks.size()-1).getTickEndTime());
         return "ok";
     }
 

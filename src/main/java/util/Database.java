@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -31,12 +32,12 @@ public class Database {
     }
 
 
-    public static List<Tick> getTicks(Connection c, int interval, int lastNum) {
+    public static List<Tick> getTicks(Connection c, int interval, int limit) {
         List<Tick> ticks = new ArrayList<Tick>();
         Statement stmt = null;
         try {
             stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM bitfinex_tick_" + interval + " ORDER BY id DESC LIMIT " + lastNum + ";");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM bitfinex_tick_" + interval + " ORDER BY id DESC LIMIT " + limit + ";");
             while (rs.next()) {
                 Tick tick = new Tick();
                 tick.setId(rs.getInt("id"));
@@ -58,6 +59,7 @@ public class Database {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
+        Collections.reverse(ticks);
         return ticks;
     }
 

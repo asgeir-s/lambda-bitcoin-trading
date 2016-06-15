@@ -18,6 +18,9 @@ public class BackTester {
         Connection database = getTestConnection();
         List<Tick> ticks = Database.getTicksSince(database, 7200, startTime);
 
+        System.out.println("first time: " + ticks.get(0).getTickEndTime());
+        System.out.println("last time: " + ticks.get(ticks.size()-1).getTickEndTime());
+
         int numOfTrades = 0;
         int position = 0;
 
