@@ -1,9 +1,6 @@
 package util;
 
-import systems.Aroon;
-import systems.Macd1;
-import systems.Roc;
-import systems.WilliamR;
+import systems.*;
 import util.model.Tick;
 
 import java.sql.Connection;
@@ -30,8 +27,8 @@ public class BackTester {
         double positionPrice = ticks.get(40).getClose();
         double money = 1000;
 
-        for (int i = 40; i <= ticks.size()-1; i++) {
-            int result = Aroon.compute(position, ticks.subList(0, i));
+        for (int i = 66; i <= ticks.size()-1; i++) {
+            int result = Ema.compute(position, ticks.subList(0, i));
 
             if (result >= -1 && result <= 1 && position != result) {
                 if (position == 0) {
