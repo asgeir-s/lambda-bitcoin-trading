@@ -15,9 +15,8 @@ import java.sql.Connection;
 import java.util.List;
 
 public class Ema {
-
-    // good 6500 - 1800
     // emma
+    // res: 6536, period: 1800, trades: 29
     final static String apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdHJlYW1JZCI6IjA3ZmRmNzUxLTdhOTctNDg5OS05YTU3LTY5NThjMjBmZDY1ZSIsImFwaUtleUlkIjoiNGUzNTdjZjItYWZkOC00ZDI5LWE5ZDItYzE0Nzg1ZDFhNTRkIiwidXNlcklkIjoiYXV0aDB8NTZiYWU2OGRkYWMyYWM1YTUzODk0MzAzIiwiaWF0IjoxNDY2MDYyNDQxLCJhdWQiOiI3Vk5TMlRjMklpUUIyUHZqVUJjYjU3NDRxSDllWTdpQiIsImlzcyI6InRyYWRlcnNiaXQuY29tIiwic3ViIjoiYXV0aDB8NTZiYWU2OGRkYWMyYWM1YTUzODk0MzAzIn0.135z1sXyWPXsFGZuhACHQvwUILQDDFWG7idNrJTvMn4";
     final static String streamId = "07fdf751-7a97-4899-9a57-6958c20fd65e";
 

@@ -14,9 +14,8 @@ import java.sql.Connection;
 import java.util.List;
 
 public class Aroon {
-
-    // super good 7200
     // JUMO
+    // res: 15011, period: 7200, trades: 1074
     final static String apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdHJlYW1JZCI6ImI5MmU5MzEzLTNiMTgtNDIzYi05OGVmLTQ4ZDQxZDdmOWMyOCIsImFwaUtleUlkIjoiYjBlOTNiYzctNDhhZi00ZDdjLWJmOTAtM2EyMWQzYWM1NWM3IiwidXNlcklkIjoiYXV0aDB8NTc1MDUzMTU0ZTVhMTg5NzcwMmE4MDhiIiwiaWF0IjoxNDY2MDAzMDMwLCJhdWQiOiI3Vk5TMlRjMklpUUIyUHZqVUJjYjU3NDRxSDllWTdpQiIsImlzcyI6InRyYWRlcnNiaXQuY29tIiwic3ViIjoiYXV0aDB8NTc1MDUzMTU0ZTVhMTg5NzcwMmE4MDhiIn0.kFm7TxbvGFflo3CtcrYBuL2IWlgabx1y56FBrY-O03s";
     final static String streamId = "b92e9313-3b18-423b-98ef-48d41d7f9c28";
 

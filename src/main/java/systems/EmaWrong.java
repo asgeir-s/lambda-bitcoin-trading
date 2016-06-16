@@ -15,11 +15,10 @@ import java.sql.Connection;
 import java.util.List;
 
 public class EmaWrong {
-
-    // good 12855 - 1800
-    // not running
-    final static String apiKey = "eyiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdHJlYW1JZCI6IjA3ZmRmNzUxLTdhOTctNDg5OS05YTU3LTY5NThjMjBmZDY1ZSIsImFwaUtleUlkIjoiNGUzNTdjZjItYWZkOC00ZDI5LWE5ZDItYzE0Nzg1ZDFhNTRkIiwidXNlcklkIjoiYXV0aDB8NTZiYWU2OGRkYWMyYWM1YTUzODk0MzAzIiwiaWF0IjoxNDY2MDYyNDQxLCJhdWQiOiI3Vk5TMlRjMklpUUIyUHZqVUJjYjU3NDRxSDllWTdpQiIsImlzcyI6InRyYWRlcnNiaXQuY29tIiwic3ViIjoiYXV0aDB8NTZiYWU2OGRkYWMyYWM1YTUzODk0MzAzIn0.135z1sXyWPXsFGZuhACHQvwUILQDDFWG7idNrJTvMn4";
-    final static String streamId = "751-7a97-4899-9a57-6958c20fd65e";
+    // Woma
+    // res: 14429, period: 1800, trades: 920
+    final static String apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdHJlYW1JZCI6IjVkZmFmYTgxLWVjOWUtNGFkNi05MGVmLTA1MTgwNDdlNjEyOCIsImFwaUtleUlkIjoiM2JjZWEwOTEtYWI2NC00ZmRjLWIwYTItYjViMzZiNWU1OGUwIiwidXNlcklkIjoiYXV0aDB8NTZiYWU2OGRkYWMyYWM1YTUzODk0MzAzIiwiaWF0IjoxNDY2MTE5MDU2LCJhdWQiOiI3Vk5TMlRjMklpUUIyUHZqVUJjYjU3NDRxSDllWTdpQiIsImlzcyI6InRyYWRlcnNiaXQuY29tIiwic3ViIjoiYXV0aDB8NTZiYWU2OGRkYWMyYWM1YTUzODk0MzAzIn0.kya_AVGF-YhW5fSKxeK18VLnWvjVWPt0ABlU5pZcMMA";
+    final static String streamId = "5dfafa81-ec9e-4ad6-90ef-0518047e6128";
 
     final static int fastEma = 30;
     final static int slowEma = 60;

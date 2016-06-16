@@ -13,7 +13,7 @@ public class BackTester {
 
     public static void main(String[] args) {
         Connection database = getTestConnection();
-        List<Tick> ticks = Database.getTicksSince(database, 1800, startTime);
+        List<Tick> ticks = Database.getTicksSince(database, 21600, startTime);
 
         System.out.println("first time: " + ticks.get(0).getTickEndTime());
         System.out.println("last time: " + ticks.get(ticks.size()-1).getTickEndTime());
@@ -28,7 +28,7 @@ public class BackTester {
         double money = 1000;
 
         for (int i = 91; i <= ticks.size()-1; i++) {
-            int result = Ema.compute(position, ticks.subList(0, i));
+            int result = WilliamR.compute(position, ticks.subList(0, i));
 
             if (result >= -1 && result <= 1 && position != result) {
                 if (position == 0) {

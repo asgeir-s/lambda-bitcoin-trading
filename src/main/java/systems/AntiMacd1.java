@@ -14,11 +14,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public class Macd1 {
-    // The BitBear
-    // res: 2858, period: 3600, trades: 25
-    final static String apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdHJlYW1JZCI6Ijg4YmMzNTBmLTU3YjctNDM0YS1iMWM1LTNiNDY3OTNiN2VjMiIsImFwaUtleUlkIjoiZWY2MmViNzctODgxMy00NDdkLTg5OWUtYmRhYTVjZTJlODNkIiwidXNlcklkIjoiYXV0aDB8NTZiNzY1ZjBlYzljZjgyNDNjODFkYTM2IiwiaWF0IjoxNDY2MDI5NTUyLCJhdWQiOiI3Vk5TMlRjMklpUUIyUHZqVUJjYjU3NDRxSDllWTdpQiIsImlzcyI6InRyYWRlcnNiaXQuY29tIiwic3ViIjoiYXV0aDB8NTZiNzY1ZjBlYzljZjgyNDNjODFkYTM2In0.onCaWwRFjIpDANxoz_ZBZyeYbISaRgIctHIgDrq6bRE";
-    final static String streamId = "88bc350f-57b7-434a-b1c5-3b46793b7ec2";
+public class AntiMacd1 {
+    // MonTac
+    // res: 3619.36, period: 3600, trades: 289
+    final static String apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdHJlYW1JZCI6Ijg0ZDcwZjY0LTgzZTgtNGQ0My04MzYzLWExMjUyNTU1MTUzNCIsImFwaUtleUlkIjoiNGQxOWQzN2MtNjMzMi00Y2YxLTgwZjEtZWE1NWE0YWNhM2QzIiwidXNlcklkIjoiYXV0aDB8NTZiYWU2OGRkYWMyYWM1YTUzODk0MzAzIiwiaWF0IjoxNDY2MTE5MTk0LCJhdWQiOiI3Vk5TMlRjMklpUUIyUHZqVUJjYjU3NDRxSDllWTdpQiIsImlzcyI6InRyYWRlcnNiaXQuY29tIiwic3ViIjoiYXV0aDB8NTZiYWU2OGRkYWMyYWM1YTUzODk0MzAzIn0.IpCl90a5WXI4x_3wYzM9fozgQ0gNfpGxlZFccFCG1a0";
+    final static String streamId = "84d70f64-83e8-4d43-8363-a12525551534";
 
     public String handler(SNSEvent event, Context context) {
         //List<Tick> ticks = Sns2Tick.sns2Ticks(event);
@@ -60,7 +60,7 @@ public class Macd1 {
         double[] macdHist = new double[ticks.size()];
 
         Core c = new Core();
-        RetCode retCode = c.macd(0, closePrice.length - 1, closePrice, 26, 36, 9, begin, length, macd, macdSignal, macdHist);
+        RetCode retCode = c.macd(0, closePrice.length - 1, closePrice, 8, 30, 9, begin, length, macd, macdSignal, macdHist);
 
         //    for (int i = 0; i < length.value; i++) {
         //        System.out.println(begin.value+i + ": time: " + ticks.get(begin.value+i).getTickEndTime() + ", macd: " + macd[i] + ", signal: " + macdSignal[i] + " at price " + closePrice[begin.value+i]);
@@ -71,10 +71,10 @@ public class Macd1 {
 
 
         if (retCode == RetCode.Success) {
-            if (lastMacd > 5) {
-                return 1;
-            } else if (lastMacd < -5) {
+            if (lastMacd > 1.9) {
                 return -1;
+            } else if (lastMacd < -1.9) {
+                return 1;
             } else if (status == 1 && lastMacd < 20) {
                 return 0;
             } else if (status == -1 && lastMacd > 20) {
