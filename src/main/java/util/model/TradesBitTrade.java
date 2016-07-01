@@ -4,7 +4,7 @@ package util.model;
  * Created by sogasg on 15/06/16.
  */
 public class TradesBitTrade {
-    private int timestamp;
+    private long timestamp;
     private Double price;
     private Double change;
     private int id;
@@ -13,11 +13,11 @@ public class TradesBitTrade {
     private Double value;
     private int signal;
 
-    public int getTimestamp() {
+    public long getTimestamp() {
         return this.timestamp;
     }
 
-    public void setTimestamp(int timestamp) {
+    public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
 

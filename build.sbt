@@ -43,7 +43,7 @@ s3Bucket := Some("ts-lambdas")
 
 region := Some("eu-central-1")
 
-awsLambdaMemory := Some(192)
+awsLambdaMemory := Some(256)
 
 awsLambdaTimeout := Some(30)
 
